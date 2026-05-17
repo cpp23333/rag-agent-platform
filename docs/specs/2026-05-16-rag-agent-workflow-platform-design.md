@@ -479,6 +479,12 @@ mvn spring-boot:run -pl server
 - 单实例：Spring Boot fat jar + systemd
 - 多实例：K8s Deployment + Service；状态全在 MySQL/PG/Redis，应用层无状态
 
+### 8.3 JDK 部署约束
+- **生产宿主机 JDK 锁定 8**，但本项目使用 Java 17（Spring Boot 3 必需）
+- 解决方式：**全部以 Docker 镜像形式交付**，镜像基底 `eclipse-temurin:17-jre`，宿主机仅需 Docker
+- 严禁产出依赖宿主机 JDK 的部署形态（如直接 `java -jar` + systemd 走宿主机 PATH 上的 java）
+- 8.2 中提到的"单实例 fat jar + systemd"仅供开发/调试，不作为生产形态
+
 ---
 
 ## 9. 安全 & 合规
