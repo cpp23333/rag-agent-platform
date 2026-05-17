@@ -1,0 +1,12 @@
+target/
+*.class
+*.log
+*.jar
+*.war
+.idea/
+*.iml
+.vscode/
+.DS_Store
+.env
+docker/data/
+*.local.yml
