@@ -12,13 +12,12 @@ spring:
 server:
   port: 8080
 
-ragagent:
-  auth:
-    jwt:
-      secret: change-me-in-prod-32-chars-minimum-please
-      access-ttl: PT1H
-      refresh-ttl: P30D
-      issuer: rag-agent-platform
+app:
+  jwt:
+    access-token-secret: change-me-in-prod-32-chars-minimum-please-for-access
+    refresh-token-secret: change-me-in-prod-32-chars-minimum-please-for-refresh
+    access-token-validity-minutes: 60
+    refresh-token-validity-days: 30
 
 logging:
   level:

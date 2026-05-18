@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: rag-agent-platform-test
+  datasource:
+    # Will be overridden by Testcontainers DynamicPropertySource
+    url: jdbc:mysql://localhost:3306/testdb
+    username: testuser
+    password: testpass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  jpa:
+    show-sql: false
+
+server:
+  port: 0  # Random port for tests
+
+app:
+  jwt:
+    # Will be overridden in tests
+    access-token-secret: test-access-secret-minimum-32-bytes-required-key
+    refresh-token-secret: test-refresh-secret-minimum-32-bytes-required-key
+    access-token-validity-minutes: 60
+    refresh-token-validity-days: 30
+
+logging:
+  level:
+    io.kyligence.ragagent: DEBUG
+    org.springframework.security: INFO
+    org.testcontainers: INFO

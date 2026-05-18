@@ -38,6 +38,20 @@ public class ApiResponse<T> {
     }
 
     /**
+     * 成功响应（别名）
+     */
+    public static <T> ApiResponse<T> ok(T data) {
+        return success(data);
+    }
+
+    /**
+     * 成功响应（无数据，别名）
+     */
+    public static <T> ApiResponse<T> ok() {
+        return success();
+    }
+
+    /**
      * 失败响应
      */
     public static <T> ApiResponse<T> error(String errorCode, String errorMessage) {

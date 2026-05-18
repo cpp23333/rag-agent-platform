@@ -34,19 +34,17 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ApiResponse<AuthService.TokenPair> register(@Valid @RequestBody RegisterRequest req) {
-        return ApiResponse.ok(auth.register(
-            new AuthService.RegisterCommand(req.email(), req.password(), req.fullName())));
+    public ApiResponse<AuthService.AuthTokens> register(@Valid @RequestBody RegisterRequest req) {
+        return ApiResponse.ok(auth.register(req.email(), req.password(), req.fullName()));
     }
 
     @PostMapping("/login")
-    public ApiResponse<AuthService.TokenPair> login(@Valid @RequestBody LoginRequest req) {
-        return ApiResponse.ok(auth.login(
-            new AuthService.LoginCommand(req.email(), req.password())));
+    public ApiResponse<AuthService.AuthTokens> login(@Valid @RequestBody LoginRequest req) {
+        return ApiResponse.ok(auth.login(req.email(), req.password(), null));
     }
 
     @PostMapping("/refresh")
-    public ApiResponse<AuthService.TokenPair> refresh(@Valid @RequestBody RefreshRequest req) {
+    public ApiResponse<AuthService.AuthTokens> refresh(@Valid @RequestBody RefreshRequest req) {
         return ApiResponse.ok(auth.refresh(req.refreshToken()));
     }
 }
