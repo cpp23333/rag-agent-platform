@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-user
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column: { name: id,            type: VARCHAR(36),  constraints: { primaryKey: true, nullable: false } }
+              - column: { name: email,         type: VARCHAR(255), constraints: { nullable: false } }
+              - column: { name: password_hash, type: VARCHAR(255), constraints: { nullable: false } }
+              - column: { name: full_name,     type: VARCHAR(128) }
+              - column: { name: created_at,    type: DATETIME,     defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+              - column: { name: updated_at,    type: DATETIME,     defaultValueComputed: "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", constraints: { nullable: false } }
+              - column: { name: deleted,       type: TINYINT(1),   defaultValueNumeric: "0", constraints: { nullable: false } }
+        - addUniqueConstraint:
+            tableName: user
+            columnNames: email
+            constraintName: uq_user_email

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: rag-agent-platform
+  datasource:
+    url: jdbc:mysql://localhost:3306/ragagent?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ragagent
+    password: ragagent
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+server:
+  port: 8080
+
+ragagent:
+  auth:
+    jwt:
+      secret: change-me-in-prod-32-chars-minimum-please
+      access-ttl: PT1H
+      refresh-ttl: P30D
+      issuer: rag-agent-platform
+
+logging:
+  level:
+    io.kyligence.ragagent: INFO

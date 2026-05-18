@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-api-key
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: api_key
+            columns:
+              - column: { name: id,            type: VARCHAR(36),  constraints: { primaryKey: true, nullable: false } }
+              - column: { name: workspace_id,  type: VARCHAR(36),  constraints: { nullable: false } }
+              - column: { name: name,          type: VARCHAR(128), constraints: { nullable: false } }
+              - column: { name: key_hash,      type: VARCHAR(255), constraints: { nullable: false } }
+              - column: { name: key_prefix,    type: VARCHAR(16),  constraints: { nullable: false } }
+              - column: { name: last_used_at,  type: DATETIME }
+              - column: { name: expires_at,    type: DATETIME }
+              - column: { name: created_at,    type: DATETIME,     defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+              - column: { name: deleted,       type: TINYINT(1),   defaultValueNumeric: "0", constraints: { nullable: false } }
+        - addUniqueConstraint:
+            tableName: api_key
+            columnNames: key_prefix
+            constraintName: uq_api_key_prefix
+        - createIndex:
+            tableName: api_key
+            indexName: idx_api_key_workspace
+            columns:
+              - column: { name: workspace_id }

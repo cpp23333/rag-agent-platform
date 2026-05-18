@@ -17,11 +17,11 @@
     <modules>
         <module>shared</module>
         <module>platform-core</module>
-        <module>rag</module>
-        <module>agent</module>
-        <module>workflow</module>
+        <!-- <module>rag</module> -->
+        <!-- <module>agent</module> -->
+        <!-- <module>workflow</module> -->
         <module>server</module>
-        <module>cli</module>
+        <!-- <module>cli</module> -->
     </modules>
 
     <properties>

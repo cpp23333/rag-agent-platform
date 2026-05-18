@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-workspace-member
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: workspace_member
+            columns:
+              - column: { name: id,            type: VARCHAR(36),  constraints: { primaryKey: true, nullable: false } }
+              - column: { name: workspace_id,  type: VARCHAR(36),  constraints: { nullable: false } }
+              - column: { name: user_id,       type: VARCHAR(36),  constraints: { nullable: false } }
+              - column: { name: role,          type: VARCHAR(16),  constraints: { nullable: false } }
+              - column: { name: created_at,    type: DATETIME,     defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+              - column: { name: deleted,       type: TINYINT(1),   defaultValueNumeric: "0", constraints: { nullable: false } }
+        - addUniqueConstraint:
+            tableName: workspace_member
+            columnNames: "workspace_id, user_id"
+            constraintName: uq_member_ws_user
+        - createIndex:
+            tableName: workspace_member
+            indexName: idx_member_user
+            columns:
+              - column: { name: user_id }
+        - createIndex:
+            tableName: workspace_member
+            indexName: idx_member_workspace
+            columns:
+              - column: { name: workspace_id }
