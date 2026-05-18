@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.StringValue;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
+import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.delete.Delete;
@@ -47,7 +48,7 @@ public class WorkspaceFilterInterceptor implements InnerInterceptor {
         String originalSql = mpBoundSql.sql();
 
         try {
-            Statement statement = PluginUtils.mpParse(originalSql, null);
+            Statement statement = CCJSqlParserUtil.parse(originalSql);
             if (statement instanceof Select select) {
                 injectWorkspaceCondition(select);
                 mpBoundSql.sql(statement.toString());
@@ -77,7 +78,7 @@ public class WorkspaceFilterInterceptor implements InnerInterceptor {
         String originalSql = mpBoundSql.sql();
 
         try {
-            Statement statement = PluginUtils.mpParse(originalSql, null);
+            Statement statement = CCJSqlParserUtil.parse(originalSql);
             if (statement instanceof Update update) {
                 injectWorkspaceCondition(update);
                 mpBoundSql.sql(statement.toString());

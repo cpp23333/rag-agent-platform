@@ -7,7 +7,16 @@
       "Bash(mvn -pl server -am compile)",
       "Bash(mvn clean *)",
       "Bash(java *)",
-      "Bash(git reset *)"
+      "Bash(git reset *)",
+      "Bash(./mvnw clean *)",
+      "Bash(mvn *)",
+      "Bash(export JAVA_HOME=\"/c/Program Files/Java/jdk-17\")",
+      "Bash(export PATH=\"$JAVA_HOME/bin:$PATH\")",
+      "Bash(set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8)",
+      "Bash(where java *)",
+      "Bash(JAVA_HOME=/f/jdk-17.0.19.10-hotspot mvn clean *)",
+      "Bash(JAVA_HOME=/f/jdk-17.0.19.10-hotspot mvn compile -DskipTests)",
+      "Bash(mysql -u root -e \"SELECT 1\")"
     ]
   }
 }

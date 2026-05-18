@@ -35,18 +35,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             try {
-                JwtTokenProvider.Claims claims = jwt.parse(token);
-                if (claims.type() == JwtTokenProvider.TokenType.ACCESS) {
-                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        claims.userId(), null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
-                    SecurityContextHolder.getContext().setAuthentication(auth);
+                var claims = jwt.validateAccessToken(token);
+                String userId = jwt.getUserId(claims);
 
-                    // Workspace ID 从 X-Workspace-Id header 指定
-                    String wsHeader = req.getHeader("X-Workspace-Id");
-                    if (wsHeader != null) {
-                        WorkspaceContextHolder.set(new WorkspaceContext(
-                            wsHeader, claims.userId(), Role.MEMBER));
-                    }
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                    userId, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
+                SecurityContextHolder.getContext().setAuthentication(auth);
+
+                // Workspace ID 从 X-Workspace-Id header 指定
+                String wsHeader = req.getHeader("X-Workspace-Id");
+                if (wsHeader != null) {
+                    String workspaceId = jwt.getWorkspaceId(claims);
+                    Role role = jwt.getRole(claims);
+                    WorkspaceContextHolder.setContext(new WorkspaceContext(
+                        workspaceId, userId, role));
                 }
             } catch (Exception ignored) {
                 // Fall through unauthenticated

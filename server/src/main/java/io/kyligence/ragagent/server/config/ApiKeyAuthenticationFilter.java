@@ -38,7 +38,7 @@ public class ApiKeyAuthenticationFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                         resolved.apiKey().getId(), null, List.of(new SimpleGrantedAuthority("ROLE_API")));
                     SecurityContextHolder.getContext().setAuthentication(auth);
-                    WorkspaceContextHolder.set(new WorkspaceContext(
+                    WorkspaceContextHolder.setContext(new WorkspaceContext(
                         resolved.workspaceId(), resolved.apiKey().getId(), Role.MEMBER));
                 });
             }
