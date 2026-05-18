@@ -1,0 +1,14 @@
+target/
+.git/
+.gitignore
+.idea/
+*.iml
+.vscode/
+.DS_Store
+.env
+.env.local
+docker/data/
+*.local.yml
+README.md
+docs/
+*.md

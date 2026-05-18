@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.kyligence.ragagent</groupId>
+        <artifactId>rag-agent-parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cli</artifactId>
+    <name>RAG Agent Platform - CLI</name>
+
+    <!-- Placeholder module - will be implemented in future plan -->
+</project>
