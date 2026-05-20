@@ -39,7 +39,19 @@ public enum ErrorCode {
     // Workflow 错误 (6000-6999)
     WORKFLOW_NOT_FOUND("6000", "Workflow not found"),
     WORKFLOW_RUN_FAILED("6001", "Workflow run failed"),
-    WORKFLOW_VALIDATION_FAILED("6002", "Workflow validation failed");
+    WORKFLOW_VALIDATION_FAILED("6002", "Workflow validation failed"),
+
+    // Platform Core 错误 (7000-7999)
+    MODEL_PROVIDER_NOT_FOUND("7000", "Model provider not found"),
+    MODEL_CALL_FAILED("7001", "Model call failed"),
+    MODEL_TIMEOUT("7002", "Model call timeout"),
+    TOOL_NOT_FOUND("7003", "Tool not found"),
+    TOOL_INVOKE_FAILED("7004", "Tool invocation failed"),
+    PROMPT_NOT_FOUND("7005", "Prompt not found"),
+    PROMPT_RENDER_FAILED("7006", "Prompt render failed"),
+    SANDBOX_EXECUTION_FAILED("7007", "Sandbox execution failed"),
+    SANDBOX_TIMEOUT("7008", "Sandbox execution timeout"),
+    SANDBOX_SECURITY_VIOLATION("7009", "Sandbox security violation");
 
     private final String code;
     private final String message;

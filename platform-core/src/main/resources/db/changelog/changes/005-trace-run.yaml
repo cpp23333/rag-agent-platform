@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-trace-run
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: trace_run
+            columns:
+              - column: { name: id, type: VARCHAR(36), constraints: { primaryKey: true, nullable: false } }
+              - column: { name: workspace_id, type: VARCHAR(36), constraints: { nullable: false } }
+              - column: { name: type, type: VARCHAR(20), constraints: { nullable: false } }
+              - column: { name: status, type: VARCHAR(20), constraints: { nullable: false } }
+              - column: { name: parent_run_id, type: VARCHAR(36) }
+              - column: { name: metadata_json, type: TEXT }
+              - column: { name: started_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+              - column: { name: ended_at, type: DATETIME }
+        - createIndex:
+            tableName: trace_run
+            indexName: idx_trace_run_workspace
+            columns:
+              - column: { name: workspace_id }
+        - createIndex:
+            tableName: trace_run
+            indexName: idx_trace_run_type_status
+            columns:
+              - column: { name: type }
+              - column: { name: status }

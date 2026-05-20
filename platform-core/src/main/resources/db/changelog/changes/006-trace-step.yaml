@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-trace-step
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: trace_step
+            columns:
+              - column: { name: id, type: VARCHAR(36), constraints: { primaryKey: true, nullable: false } }
+              - column: { name: run_id, type: VARCHAR(36), constraints: { nullable: false } }
+              - column: { name: name, type: VARCHAR(128), constraints: { nullable: false } }
+              - column: { name: type, type: VARCHAR(20), constraints: { nullable: false } }
+              - column: { name: input, type: LONGTEXT }
+              - column: { name: output, type: LONGTEXT }
+              - column: { name: tokens, type: INT }
+              - column: { name: cost, type: DECIMAL(10,6) }
+              - column: { name: latency_ms, type: BIGINT }
+              - column: { name: created_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+        - createIndex:
+            tableName: trace_step
+            indexName: idx_trace_step_run
+            columns:
+              - column: { name: run_id }
