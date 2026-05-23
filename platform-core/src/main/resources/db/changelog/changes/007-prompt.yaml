@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-prompt
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: prompt
+            columns:
+              - column: { name: id, type: VARCHAR(36), constraints: { primaryKey: true, nullable: false } }
+              - column: { name: workspace_id, type: BIGINT, constraints: { nullable: false } }
+              - column: { name: name, type: VARCHAR(128), constraints: { nullable: false } }
+              - column: { name: version, type: VARCHAR(32), constraints: { nullable: false } }
+              - column: { name: template, type: LONGTEXT, constraints: { nullable: false } }
+              - column: { name: variables_schema, type: TEXT }
+              - column: { name: description, type: VARCHAR(512) }
+              - column: { name: created_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+              - column: { name: updated_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+        - addUniqueConstraint:
+            tableName: prompt
+            columnNames: "workspace_id, name, version"
+            constraintName: uq_prompt_ws_name_version
+        - createIndex:
+            tableName: prompt
+            indexName: idx_prompt_workspace
+            columns:
+              - column: { name: workspace_id }
