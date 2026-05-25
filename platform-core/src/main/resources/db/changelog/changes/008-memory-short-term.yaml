@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-memory-short-term
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: memory_short_term
+            columns:
+              - column: { name: id, type: BIGINT, autoIncrement: true, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: run_id, type: VARCHAR(36), constraints: { nullable: false } }
+              - column: { name: idx, type: INT, constraints: { nullable: false } }
+              - column: { name: role, type: VARCHAR(16), constraints: { nullable: false } }
+              - column: { name: content, type: LONGTEXT, constraints: { nullable: false } }
+              - column: { name: name, type: VARCHAR(128) }
+              - column: { name: metadata_json, type: TEXT }
+              - column: { name: created_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+        - createIndex:
+            tableName: memory_short_term
+            indexName: idx_stm_run_idx
+            unique: true
+            columns:
+              - column: { name: run_id }
+              - column: { name: idx }

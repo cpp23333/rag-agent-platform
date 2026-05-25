@@ -1,6 +1,7 @@
 package io.kyligence.ragagent.core.tenant;
 
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
+import io.kyligence.ragagent.core.auth.Role;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -36,11 +37,13 @@ class WorkspaceFilterInterceptorTest {
   private ResultHandler<?> resultHandler;
 
   private static final String WORKSPACE_ID = "test-workspace-123";
+  private static final String USER_ID = "test-user-456";
 
   @BeforeEach
   void setUp() {
     interceptor = new WorkspaceFilterInterceptor();
-    WorkspaceContextHolder.setWorkspaceId(WORKSPACE_ID);
+    WorkspaceContext context = new WorkspaceContext(WORKSPACE_ID, USER_ID, Role.ADMIN);
+    WorkspaceContextHolder.setContext(context);
   }
 
   @AfterEach
@@ -226,7 +229,8 @@ class WorkspaceFilterInterceptorTest {
   @DisplayName("interceptor uses workspace_id from context")
   void interceptor_usesWorkspaceIdFromContext() throws SQLException {
     String customWorkspaceId = "custom-workspace-999";
-    WorkspaceContextHolder.setWorkspaceId(customWorkspaceId);
+    WorkspaceContext customContext = new WorkspaceContext(customWorkspaceId, USER_ID, Role.ADMIN);
+    WorkspaceContextHolder.setContext(customContext);
 
     String originalSql = "SELECT * FROM knowledge_base";
     BoundSql boundSql = createBoundSql(originalSql);
@@ -245,11 +249,9 @@ class WorkspaceFilterInterceptorTest {
 
   // Helper method to create BoundSql
   private BoundSql createBoundSql(String sql) {
-    return new BoundSql(
-        mock(org.apache.ibatis.mapping.MappedStatement.class),
-        sql,
-        null,
-        null);
+    org.apache.ibatis.session.Configuration configuration =
+        new org.apache.ibatis.session.Configuration();
+    return new BoundSql(configuration, sql, null, null);
   }
 
   // Test marker annotation for workspace-aware mapper

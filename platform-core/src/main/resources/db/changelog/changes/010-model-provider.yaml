@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010-model-provider
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: model_provider
+            columns:
+              - column: { name: id, type: VARCHAR(36), constraints: { primaryKey: true, nullable: false } }
+              - column: { name: workspace_id, type: BIGINT, constraints: { nullable: false } }
+              - column: { name: name, type: VARCHAR(64), constraints: { nullable: false } }
+              - column: { name: type, type: VARCHAR(32), constraints: { nullable: false } }
+              - column: { name: base_url, type: VARCHAR(512), constraints: { nullable: false } }
+              - column: { name: api_key_encrypted, type: VARCHAR(1024), constraints: { nullable: false } }
+              - column: { name: models_json, type: TEXT }
+              - column: { name: enabled, type: BOOLEAN, defaultValueBoolean: true, constraints: { nullable: false } }
+              - column: { name: created_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+              - column: { name: updated_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+        - addUniqueConstraint:
+            tableName: model_provider
+            columnNames: "workspace_id, name"
+            constraintName: uq_provider_ws_name
+        - createIndex:
+            tableName: model_provider
+            indexName: idx_provider_workspace
+            columns:
+              - column: { name: workspace_id }
