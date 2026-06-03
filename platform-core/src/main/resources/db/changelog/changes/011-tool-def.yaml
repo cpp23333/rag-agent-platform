@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 011-tool-def
+      author: ragagent
+      changes:
+        - createTable:
+            tableName: tool_def
+            columns:
+              - column: { name: id, type: VARCHAR(36), constraints: { primaryKey: true, nullable: false } }
+              - column: { name: workspace_id, type: BIGINT, constraints: { nullable: false } }
+              - column: { name: name, type: VARCHAR(128), constraints: { nullable: false } }
+              - column: { name: description, type: VARCHAR(512) }
+              - column: { name: impl_type, type: VARCHAR(32), constraints: { nullable: false } }
+              - column: { name: input_schema_json, type: TEXT }
+              - column: { name: output_schema_json, type: TEXT }
+              - column: { name: config_json, type: TEXT }
+              - column: { name: enabled, type: BOOLEAN, defaultValueBoolean: true, constraints: { nullable: false } }
+              - column: { name: created_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+              - column: { name: updated_at, type: DATETIME, defaultValueComputed: "CURRENT_TIMESTAMP", constraints: { nullable: false } }
+        - addUniqueConstraint:
+            tableName: tool_def
+            columnNames: "workspace_id, name"
+            constraintName: uq_tool_ws_name
+        - createIndex:
+            tableName: tool_def
+            indexName: idx_tool_workspace
+            columns:
+              - column: { name: workspace_id }

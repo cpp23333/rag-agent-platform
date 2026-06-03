@@ -16,7 +16,16 @@
       "Bash(where java *)",
       "Bash(JAVA_HOME=/f/jdk-17.0.19.10-hotspot mvn clean *)",
       "Bash(JAVA_HOME=/f/jdk-17.0.19.10-hotspot mvn compile -DskipTests)",
-      "Bash(mysql -u root -e \"SELECT 1\")"
+      "Bash(mysql -u root -e \"SELECT 1\")",
+      "Read(//Users/panpeng.chen/.m2/**)",
+      "Read(//Users/maven/repo/**)",
+      "Bash(/usr/libexec/java_home -V)",
+      "Bash(git push *)",
+      "Bash(docker --version)",
+      "Read(//Users/panpeng.chen/.claude/plugins/**)",
+      "Read(//Users/panpeng.chen/.claude/skills/**)",
+      "Bash(claude --version)",
+      "Bash(bash /Users/panpeng.chen/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/hooks/session-start)"
     ]
   }
 }

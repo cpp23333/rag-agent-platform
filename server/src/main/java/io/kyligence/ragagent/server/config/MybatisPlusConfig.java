@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @MapperScan({
-    "io.kyligence.ragagent.core.auth"
+    "io.kyligence.ragagent.core.auth",
+    "io.kyligence.ragagent.core.event"
 })
 public class MybatisPlusConfig {
 
