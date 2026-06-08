@@ -6,6 +6,11 @@ spring:
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
+    postgres:
+      url: jdbc:postgresql://localhost:5432/ragagent_vec
+      username: ragagent
+      password: ragagent
+      driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
@@ -24,7 +29,7 @@ ragagent:
     default-chat: openai/gpt-4o-mini
     fallback-chat: deepseek/deepseek-chat
     default-embedding: openai/text-embedding-3-small
-    default-rerank: null
+    default-rerank: bge/bge-reranker-v2-m3
     retry-max-attempts: 3
     timeout-seconds: 120
     encryption-key: ${MODEL_GATEWAY_ENCRYPTION_KEY:change-me-in-prod-32-chars-min!}

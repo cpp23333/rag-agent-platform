@@ -17,7 +17,7 @@
     <modules>
         <module>shared</module>
         <module>platform-core</module>
-        <!-- <module>rag</module> -->
+        <module>rag</module>
         <!-- <module>agent</module> -->
         <!-- <module>workflow</module> -->
         <module>server</module>
@@ -50,9 +50,19 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>io.kyligence.ragagent</groupId>
+                <artifactId>rag</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pgvector</groupId>
+                <artifactId>pgvector</artifactId>
+                <version>0.1.6</version>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>

@@ -24,6 +24,10 @@
             <groupId>io.kyligence.ragagent</groupId>
             <artifactId>platform-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.kyligence.ragagent</groupId>
+            <artifactId>rag</artifactId>
+        </dependency>
 
         <!-- Spring Boot Web -->
         <dependency>
